@@ -10,18 +10,20 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.bdpiparva.daydream.R;
-import com.bdpiparva.daydream.models.CalenderEvent;
+import com.bdpiparva.models.CalenderEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class CalenderEventAdaptor extends ArrayAdapter<CalenderEvent> {
 	private int resource;
+	private final boolean allDay;
 	private SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
 
-	public CalenderEventAdaptor(@NonNull Context context, int resource, @NonNull List<CalenderEvent> calenderEvents) {
+	public CalenderEventAdaptor(@NonNull Context context, int resource, @NonNull List<CalenderEvent> calenderEvents, boolean allDay) {
 		super(context, resource, calenderEvents);
 		this.resource = resource;
+		this.allDay = allDay;
 	}
 
 	@NonNull
@@ -37,6 +39,7 @@ public class CalenderEventAdaptor extends ArrayAdapter<CalenderEvent> {
 			viewHolder.title = convertView.findViewById(R.id.title);
 			viewHolder.topTick = convertView.findViewById(R.id.top_tick);
 			viewHolder.bottomTick = convertView.findViewById(R.id.bottom_tick);
+			viewHolder.stateIndicator = convertView.findViewById(R.id.state_indicator);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -52,12 +55,30 @@ public class CalenderEventAdaptor extends ArrayAdapter<CalenderEvent> {
 
 		viewHolder.start.setText(stringTime(calenderEvent.getStart()));
 		viewHolder.title.setText(calenderEvent.getTitle());
+
+		if (allDay) {
+			return convertView;
+		}
+
+		if (calenderEvent.isCurrent()) {
+			viewHolder.stateIndicator.setBackgroundResource(R.drawable.ic_current);
+		}
+
+		if (calenderEvent.isPassed()) {
+			viewHolder.stateIndicator.setBackgroundResource(R.drawable.ic_finished);
+		}
+
+		if (calenderEvent.isUpcoming()) {
+			viewHolder.stateIndicator.setBackgroundResource(R.drawable.ic_upcoming);
+		}
+
 		return convertView;
 	}
 
 	private class ViewHolder {
 		private TextView start;
 		private TextView title;
+		private TextView stateIndicator;
 		private View topTick;
 		private View bottomTick;
 	}

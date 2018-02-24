@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="21dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/top_tick"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#fff" />
+
+        <TextView
+            android:id="@+id/state_indicator"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_upcoming"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="A"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/bottom_tick"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#fff" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="10:00 AM"
+        android:textColor="#fff"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Meeting with sheldon"
+        android:textColor="#fff" />
+
+</LinearLayout>

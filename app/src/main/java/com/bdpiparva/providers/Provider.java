@@ -1,4 +1,4 @@
-package com.bdpiparva.daydream.providers;
+package com.bdpiparva.providers;
 
 import android.content.Context;
 import android.content.pm.PackageManager;

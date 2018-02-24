@@ -1,4 +1,4 @@
-package com.bdpiparva.daydream.models;
+package com.bdpiparva.models;
 
 import java.util.ArrayList;
 import java.util.Comparator;

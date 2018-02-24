@@ -1,15 +1,16 @@
-package com.bdpiparva.daydream.providers;
+package com.bdpiparva.providers;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.provider.CalendarContract.Calendars;
 
-import com.bdpiparva.daydream.models.CalenderInfo;
+import com.bdpiparva.models.CalenderInfo;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CalenderProvider extends HashSet<CalenderInfo> {
@@ -22,7 +23,11 @@ public class CalenderProvider extends HashSet<CalenderInfo> {
 	}
 
 	public Long[] allCalenderIds() {
-		return stream().map(ci -> ci.getId()).collect(Collectors.toList()).toArray(new Long[0]);
+		return stream().map(ci -> ci.getId()).collect(Collectors.toSet()).toArray(new Long[0]);
+	}
+
+	public Set<String> allCalenderIdSet() {
+		return stream().map(ci -> String.valueOf(ci.getId())).collect(Collectors.toSet());
 	}
 
 	public List<CalenderInfo> toList() {

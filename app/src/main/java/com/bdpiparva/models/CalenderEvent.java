@@ -1,23 +1,28 @@
-package com.bdpiparva.daydream.models;
+package com.bdpiparva.models;
+
+import java.text.SimpleDateFormat;
 
 /**
  * Created by bhupendrakumar on 2/18/18.
  */
 public class CalenderEvent {
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
 	private Long calendarId;
 	private String title;
 	private String description;
 	private Long start;
 	private Long end;
 	private String eventLocation;
+	private boolean allDay;
 
-	public CalenderEvent(Long calendarId, String title, String description, Long start, Long end, String eventLocation) {
+	public CalenderEvent(Long calendarId, String title, String description, Long start, Long end, String eventLocation, boolean allDay) {
 		this.calendarId = calendarId;
 		this.title = title;
 		this.description = description;
 		this.start = start;
 		this.end = end;
 		this.eventLocation = eventLocation;
+		this.allDay = allDay;
 	}
 
 	public Long getCalendarId() {
@@ -44,6 +49,33 @@ public class CalenderEvent {
 		return eventLocation;
 	}
 
+	public boolean isAllDay() {
+		return allDay;
+	}
+
+	public String getStartTime() {
+		return toStringTime(getStart());
+	}
+
+	public boolean isCurrent() {
+		return System.currentTimeMillis() >= start && System.currentTimeMillis() < end;
+	}
+
+	public boolean isPassed() {
+		return System.currentTimeMillis() > end;
+	}
+
+	public boolean isUpcoming() {
+		return System.currentTimeMillis() < start;
+	}
+
+	private String toStringTime(Long millis) {
+		if (millis == null) {
+			return "";
+		}
+		return sdf.format(millis);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -51,6 +83,7 @@ public class CalenderEvent {
 
 		CalenderEvent that = (CalenderEvent) o;
 
+		if (allDay != that.allDay) return false;
 		if (calendarId != null ? !calendarId.equals(that.calendarId) : that.calendarId != null)
 			return false;
 		if (title != null ? !title.equals(that.title) : that.title != null) return false;
@@ -69,6 +102,7 @@ public class CalenderEvent {
 		result = 31 * result + (start != null ? start.hashCode() : 0);
 		result = 31 * result + (end != null ? end.hashCode() : 0);
 		result = 31 * result + (eventLocation != null ? eventLocation.hashCode() : 0);
+		result = 31 * result + (allDay ? 1 : 0);
 		return result;
 	}
 }

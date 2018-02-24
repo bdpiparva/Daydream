@@ -1,4 +1,4 @@
-package com.bdpiparva.daydream.models;
+package com.bdpiparva.models;
 
 /**
  * Created by bhupendrakumar on 2/18/18.

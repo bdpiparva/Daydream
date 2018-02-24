@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.bdpiparva.daydream.R;
-import com.bdpiparva.daydream.models.CalenderInfo;
-import com.bdpiparva.daydream.providers.CalenderProvider;
+import com.bdpiparva.models.CalenderInfo;
+import com.bdpiparva.providers.CalenderProvider;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
