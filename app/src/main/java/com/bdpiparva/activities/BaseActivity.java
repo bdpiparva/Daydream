@@ -1,13 +1,13 @@
 package com.bdpiparva.activities;
 
-import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
 	private static final int REQUEST_PERMISSION_CODE = 2;
 
 	protected void requestPermissions(String... permissions) {

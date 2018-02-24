@@ -1,24 +1,28 @@
 package com.bdpiparva.widgets;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.widget.RemoteViewsService;
 
 import com.bdpiparva.models.CalenderEvent;
-import com.bdpiparva.providers.CalenderProvider;
-import com.bdpiparva.providers.EventProviders;
+import com.bdpiparva.providers.EventProvider;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class CalenderWidgetService extends RemoteViewsService {
 	@Override
 	public RemoteViewsFactory onGetViewFactory(Intent intent) {
-		CalenderProvider calenderProvider = CalenderProvider.getInstance(getContentResolver());
-		final EventProviders eventProviders = new EventProviders(getApplicationContext());
-		Set<String> allCalenderIds = calenderProvider.allCalenderIdSet();
-		final List<CalenderEvent> calenderEvents = eventProviders.getEventsFromTodayAndNextDays(7, allCalenderIds)
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		Set<String> selectedCalenders = preferences.getStringSet("calenders", new HashSet<>());
+
+		final EventProvider eventProvider = new EventProvider(getApplicationContext());
+		int eventForDays = Integer.valueOf(preferences.getString("event_for_days", "7"));
+		final List<CalenderEvent> calenderEvents = eventProvider.getEventsFromTodayAndNextDays(eventForDays, selectedCalenders)
 			.listAndSort();
 
-		return new CalenderListViewFactory(getApplicationContext(), intent, calenderEvents);
+		return new CalenderListViewFactory2(getApplicationContext(), intent, calenderEvents);
 	}
 }

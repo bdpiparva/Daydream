@@ -54,7 +54,9 @@
                 android:resource="@xml/calender_widget_info" />
         </receiver>
 
-        <activity android:name="com.bdpiparva.activities.MainActivity">
+        <activity
+            android:name="com.bdpiparva.activities.MainActivity"
+            android:label="Calender Widget">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

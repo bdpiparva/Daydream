@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <MultiSelectListPreference
+        android:dialogTitle="Select calender"
+        android:key="calenders"
+        android:summary="Calender to show in widget"
+        android:title="Calender" />
+
+    <EditTextPreference
+        android:dialogTitle="Show events for"
+        android:inputType="number"
+        android:key="event_for_days"
+        android:summary="Shows event for specified days."
+        android:title="Days" />
+
+    <com.bdpiparva.widgets.SeekBarPreference
+        android:defaultValue="3"
+        android:key="calender_color_bar_width"
+        android:summary="Something to  say"
+        android:title="Calender color bar width" />
+
+</PreferenceScreen>

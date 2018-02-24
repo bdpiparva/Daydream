@@ -20,12 +20,14 @@ import static android.provider.CalendarContract.Events;
  * Created by bhupendrakumar on 2/18/18.
  */
 
-public class EventProviders extends Provider {
-	public static final String[] DEFAULT_PROJECTION = {Instances.CALENDAR_ID, Instances.TITLE,
-		Instances.DESCRIPTION, Instances.DTSTART, Instances.DTEND, Instances.EVENT_LOCATION, Instances.ALL_DAY
+public class EventProvider extends Provider {
+	public static final String[] DEFAULT_PROJECTION = {
+		Instances.CALENDAR_ID, Instances.TITLE, Instances.DESCRIPTION,
+		Instances.DTSTART, Instances.DTEND, Instances.EVENT_LOCATION,
+		Instances.ALL_DAY, Instances.DISPLAY_COLOR
 	};
 
-	public EventProviders(Context context) {
+	public EventProvider(Context context) {
 		super(context);
 	}
 
@@ -53,7 +55,8 @@ public class EventProviders extends Provider {
 				cursor.getLong(3),
 				cursor.getLong(4),
 				cursor.getString(5),
-				isAllDay(cursor.getString(6))
+				isAllDay(cursor.getString(6)),
+				cursor.getInt(7)
 			));
 		}
 		return calenderEvents;

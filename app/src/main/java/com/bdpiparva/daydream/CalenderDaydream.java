@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bdpiparva.daydream.adapters.CalenderEventAdaptor;
 import com.bdpiparva.models.CalenderEvent;
-import com.bdpiparva.providers.EventProviders;
+import com.bdpiparva.providers.EventProvider;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,7 +34,7 @@ public class CalenderDaydream extends DreamService {
 		setFullscreen(true);
 		setContentView(R.layout.calender_daydream);
 
-		final EventProviders eventProviders = new EventProviders(this);
+		final EventProvider eventProvider = new EventProvider(this);
 
 		appointmentsListView = findViewById(R.id.calender_events);
 		textClock = findViewById(R.id.clock);
@@ -43,7 +43,7 @@ public class CalenderDaydream extends DreamService {
 
 		sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-		List<CalenderEvent> allEvents = eventProviders.getEventsFromTodayAndNextDays(7, selectedCalenders()).listAndSort();
+		List<CalenderEvent> allEvents = eventProvider.getEventsFromTodayAndNextDays(7, selectedCalenders()).listAndSort();
 
 		allDayEvents.setOnClickListener(view -> renderDayLongEvents(allEvents));
 		events.setOnClickListener(view -> renderSmallEvents(allEvents));

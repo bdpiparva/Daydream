@@ -2,9 +2,6 @@ package com.bdpiparva.models;
 
 import java.text.SimpleDateFormat;
 
-/**
- * Created by bhupendrakumar on 2/18/18.
- */
 public class CalenderEvent {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
 	private Long calendarId;
@@ -14,8 +11,9 @@ public class CalenderEvent {
 	private Long end;
 	private String eventLocation;
 	private boolean allDay;
+	private int color;
 
-	public CalenderEvent(Long calendarId, String title, String description, Long start, Long end, String eventLocation, boolean allDay) {
+	public CalenderEvent(Long calendarId, String title, String description, Long start, Long end, String eventLocation, boolean allDay, int color) {
 		this.calendarId = calendarId;
 		this.title = title;
 		this.description = description;
@@ -23,6 +21,7 @@ public class CalenderEvent {
 		this.end = end;
 		this.eventLocation = eventLocation;
 		this.allDay = allDay;
+		this.color = color;
 	}
 
 	public Long getCalendarId() {
@@ -57,6 +56,10 @@ public class CalenderEvent {
 		return toStringTime(getStart());
 	}
 
+	public String getEndTime() {
+		return toStringTime(end);
+	}
+
 	public boolean isCurrent() {
 		return System.currentTimeMillis() >= start && System.currentTimeMillis() < end;
 	}
@@ -67,6 +70,10 @@ public class CalenderEvent {
 
 	public boolean isUpcoming() {
 		return System.currentTimeMillis() < start;
+	}
+
+	public int getColor() {
+		return color;
 	}
 
 	private String toStringTime(Long millis) {
@@ -84,6 +91,7 @@ public class CalenderEvent {
 		CalenderEvent that = (CalenderEvent) o;
 
 		if (allDay != that.allDay) return false;
+		if (color != that.color) return false;
 		if (calendarId != null ? !calendarId.equals(that.calendarId) : that.calendarId != null)
 			return false;
 		if (title != null ? !title.equals(that.title) : that.title != null) return false;
@@ -103,6 +111,7 @@ public class CalenderEvent {
 		result = 31 * result + (end != null ? end.hashCode() : 0);
 		result = 31 * result + (eventLocation != null ? eventLocation.hashCode() : 0);
 		result = 31 * result + (allDay ? 1 : 0);
+		result = 31 * result + color;
 		return result;
 	}
 }

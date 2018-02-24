@@ -15,10 +15,11 @@ public class CalenderWidgetProvider extends AppWidgetProvider {
 		for (int widgetId : allWidgetIds) {
 			Intent intent = new Intent(context, CalenderWidgetService.class);
 			intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+			intent.putExtra("date", System.currentTimeMillis());
 			intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
 
 			RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.calender_widget);
-			remoteViews.setRemoteAdapter(widgetId, R.id.calender_events, intent);
+			remoteViews.setRemoteAdapter(R.id.calender_events, intent);
 
 			appWidgetManager.updateAppWidget(widgetId, remoteViews);
 		}
