@@ -4,17 +4,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bdpiparva.daydream.R;
-
-/**
- * Created by bhupendrakumar on 2/25/18.
- */
 
 public class ColorPickerPreference extends DialogPreference implements SeekBar.OnSeekBarChangeListener {
 

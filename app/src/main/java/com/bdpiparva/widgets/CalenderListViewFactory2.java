@@ -12,7 +12,10 @@ import com.bdpiparva.models.CalenderEvent;
 
 import java.util.List;
 
-import static com.bdpiparva.widgets.fragments.CalenderWidgetPreferenceFragment.*;
+import static com.bdpiparva.widgets.fragments.CalenderWidgetPreferenceFragment.CALENDER_COLOR_BAR_TRANSPARENCY;
+import static com.bdpiparva.widgets.fragments.CalenderWidgetPreferenceFragment.CALENDER_COLOR_BAR_WIDTH;
+import static com.bdpiparva.widgets.fragments.CalenderWidgetPreferenceFragment.CALENDER_WIDGET_BACKGROUND_COLOR;
+import static com.bdpiparva.widgets.fragments.CalenderWidgetPreferenceFragment.CALENDER_WIDGET_TEXT_COLOR;
 import static java.text.MessageFormat.format;
 
 public class CalenderListViewFactory2 extends AbstractListViewFactory<CalenderEvent> {
