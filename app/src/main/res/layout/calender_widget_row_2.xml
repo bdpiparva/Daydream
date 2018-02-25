@@ -3,6 +3,7 @@
     android:id="@+id/event_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/tile_background"
     android:orientation="horizontal"
     android:padding="8dp"
     android:textColor="#fff">

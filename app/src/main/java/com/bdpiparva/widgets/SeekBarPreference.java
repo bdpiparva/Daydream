@@ -17,24 +17,12 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 	private SeekBar seekBar;
 	private Integer mCurrentValue;
 	private int max = 10;
-
-	public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
-		init(context, attrs, defStyleAttr, defStyleRes);
-	}
-
-	public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-		init(context, attrs, defStyleAttr, 0);
-	}
+	private final LayoutInflater layoutInflater;
 
 	public SeekBarPreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init(context, attrs, 0,0);
-	}
-
-	public SeekBarPreference(Context context) {
-		super(context);
+		layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		init(context, attrs, 0, 0);
 	}
 
 	private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -53,8 +41,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 	@Override
 	protected View onCreateView(ViewGroup parent) {
 		super.onCreateView(parent);
-		LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View inflatedView = li.inflate(R.layout.seek_bar_preference, parent, false);
+		View inflatedView = layoutInflater.inflate(R.layout.seek_bar_preference, parent, false);
 
 		seekBar = inflatedView.findViewById(R.id.seekbar);
 		seekBar.setMax(max);
