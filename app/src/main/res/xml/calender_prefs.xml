@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <MultiSelectListPreference
         android:dialogTitle="Select calender"
@@ -17,7 +18,25 @@
     <com.bdpiparva.widgets.SeekBarPreference
         android:defaultValue="3"
         android:key="calender_color_bar_width"
-        android:summary="Something to  say"
-        android:title="Calender color bar width" />
+        android:summary="Width of calender color bar"
+        android:title="Calender width"
+        app:max="10" />
+
+    <com.bdpiparva.widgets.SeekBarPreference
+        android:defaultValue="3"
+        android:key="calender_color_bar_transparency"
+        android:summary="Calender color transparency"
+        android:title="Calender color transparency"
+        app:max="100" />
+
+    <com.bdpiparva.preferences.ColorPickerPreference
+        android:key="calender_widget_text_color"
+        android:summary="Calender widget text color"
+        android:title="Text color" />
+
+    <com.bdpiparva.preferences.ColorPickerPreference
+        android:key="calender_widget_background_color"
+        android:summary="Calender item background color"
+        android:title="Background color" />
 
 </PreferenceScreen>

@@ -12,30 +12,42 @@ import android.widget.TextView;
 
 import com.bdpiparva.daydream.R;
 
-/**
- * Created by bhupendrakumar on 2/24/18.
- */
-
 public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarChangeListener {
 	private TextView value;
 	private SeekBar seekBar;
 	private Integer mCurrentValue;
-	private Integer defaultValue = 0;
+	private int max = 10;
 
 	public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
+		init(context, attrs, defStyleAttr, defStyleRes);
 	}
 
 	public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
+		init(context, attrs, defStyleAttr, 0);
 	}
 
 	public SeekBarPreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		init(context, attrs, 0,0);
 	}
 
 	public SeekBarPreference(Context context) {
 		super(context);
+	}
+
+	private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+		final TypedArray styledAttributes = context.obtainStyledAttributes(attrs, R.styleable.SeekBarPreference, defStyleAttr, defStyleRes);
+
+		for (int i = styledAttributes.getIndexCount() - 1; i >= 0; i--) {
+			int attr = styledAttributes.getIndex(i);
+			switch (attr) {
+				case R.styleable.SeekBarPreference_max:
+					max = styledAttributes.getInteger(attr, 10);
+					break;
+			}
+		}
 	}
 
 	@Override
@@ -45,37 +57,34 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 		View inflatedView = li.inflate(R.layout.seek_bar_preference, parent, false);
 
 		seekBar = inflatedView.findViewById(R.id.seekbar);
+		seekBar.setMax(max);
 		value = inflatedView.findViewById(R.id.value);
 		seekBar.setOnSeekBarChangeListener(this);
+		updateView();
 
 		return inflatedView;
 	}
 
 	@Override
 	protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
-		if (restorePersistedValue) {
-			mCurrentValue = (Integer) defaultValue;
-		} else {
-			mCurrentValue = (Integer) defaultValue;
-			persistInt(mCurrentValue);
-		}
+		final String value = restorePersistedValue ? String.valueOf(getPersistedInt(0)) : String.valueOf(defaultValue);
 
-		if (mCurrentValue != null) {
-			value.setText(String.valueOf(mCurrentValue));
-			seekBar.scrollTo(mCurrentValue, 0);
+		if (value == null || value.trim().isEmpty()) {
+			mCurrentValue = 0;
+		} else {
+			mCurrentValue = Integer.parseInt(value);
 		}
 	}
 
 	@Override
 	protected Object onGetDefaultValue(TypedArray a, int index) {
-		Integer defaultValue = a.getInteger(index, 3);
-		setDefaultValue(defaultValue);
-		return defaultValue;
+		return a.getInteger(index, 3);
 	}
 
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-		value.setText(String.valueOf(progress));
+		mCurrentValue = progress;
+		updateView();
 	}
 
 	@Override
@@ -86,5 +95,11 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 	@Override
 	public void onStopTrackingTouch(SeekBar seekBar) {
 
+	}
+
+	private void updateView() {
+		value.setText(String.valueOf(mCurrentValue));
+		seekBar.setProgress(mCurrentValue);
+		persistInt(mCurrentValue);
 	}
 }

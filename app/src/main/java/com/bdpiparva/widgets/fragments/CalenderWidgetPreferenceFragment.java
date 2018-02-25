@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalenderWidgetPreferenceFragment extends PreferenceFragment {
+	public static final String CALENDER_WIDGET_TEXT_COLOR = "calender_widget_text_color";
+	public static final String CALENDER_COLOR_BAR_WIDTH = "calender_color_bar_width";
+	public static final String CALENDER_COLOR_BAR_TRANSPARENCY = "calender_color_bar_transparency";
+	public static final String CALENDER_WIDGET_BACKGROUND_COLOR = "calender_widget_background_color";
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -17,9 +17,9 @@ public class CalenderWidgetService extends RemoteViewsService {
 	public RemoteViewsFactory onGetViewFactory(Intent intent) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Set<String> selectedCalenders = preferences.getStringSet("calenders", new HashSet<>());
-
 		final EventProvider eventProvider = new EventProvider(getApplicationContext());
 		int eventForDays = Integer.valueOf(preferences.getString("event_for_days", "7"));
+
 		final List<CalenderEvent> calenderEvents = eventProvider.getEventsFromTodayAndNextDays(eventForDays, selectedCalenders)
 			.listAndSort();
 
